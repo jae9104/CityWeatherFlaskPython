@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>What Should I Wear?</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <main class="card">
+      <p class="eyebrow">Simple weather helper</p>
+      <h1>What should I wear?</h1>
+      <p class="intro">Enter a city to get the current temperature and a quick outfit suggestion.</p>
+
+      <form method="post">
+        <label for="city">City</label>
+        <div class="search">
+          <input id="city" name="city" type="text" placeholder="Add a city here" required>
+          <button type="submit">Check weather</button>
+        </div>
+      </form>
+
+      {% if error %}
+        <p class="message error">{{ error }}</p>
+      {% endif %}
+
+      {% if weather %}
+        <section class="weather" aria-live="polite">
+          <p class="location">{{ weather.city }}, {{ weather.country }}</p>
+          <p class="temperature">{{ weather.temperature }}°C</p>
+          <p class="description">{{ weather.description }}</p>
+          <div class="advice">
+            <strong>Wear this:</strong>
+            <span>{{ weather.advice }}</span>
+          </div>
+        </section>
+      {% endif %}
+    </main>
+  </body>
+</html>
